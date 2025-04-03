@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Countdown to 9:30 AM EST</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #0f172a;
+      color: #f8fafc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    #timer {
+      font-size: 3rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Countdown to 9:30 AM EST</h1>
+  <div id="timer">Loading...</div>
+
+  <script>
+    // Function to get next 9:30 AM EST (UTC-5 or UTC-4 depending on DST)
+    function getNextTargetTime() {
+      const now = new Date();
+      const target = new Date();
+
+      target.setUTCHours(13, 30, 0, 0); // 9:30 AM EST = 13:30 UTC (when EST is UTC-5)
+
+      if (target <= now) {
+        target.setUTCDate(target.getUTCDate() + 1); // move to next day if already passed
+      }
+
+      return target;
+    }
+
+    const targetTime = getNextTargetTime();
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetTime - now;
+
+      if (diff <= 0) {
+        document.getElementById("timer").textContent = "It's 9:30 AM EST!";
+        clearInterval(timerInterval);
+        return;
+      }
+
+      const hours = String(Math.floor(diff / (1000 * 60 * 60))).padStart(2, '0');
+      const minutes = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+      const seconds = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+
+      document.getElementById("timer").textContent = `${hours}:${minutes}:${seconds}`;
+    }
+
+    updateCountdown();
+    const timerInterval = setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
