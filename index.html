@@ -31,6 +31,11 @@
       max-width: 1000px;
       height: 600px;
     }
+    .finviz-img {
+      max-width: 1000px;
+      width: 100%;
+      margin-top: 2rem;
+    }
   </style>
 </head>
 <body>
@@ -82,6 +87,36 @@
     </script>
   </div>
   <!-- TradingView Widget END -->
+
+ <!-- TradingView Widget: S&P 500 Intraday Chart BEGIN -->
+ <div class="tradingview-widget-container" style="margin-top: 2rem;">
+  <div id="tradingview_spx_chart"></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+  <script type="text/javascript">
+    new TradingView.widget({
+      "width": "100%",
+      "height": 600,
+      "symbol": "OANDA:SPX500USD",
+      "interval": "5",
+      "timezone": "Etc/UTC",
+      "theme": "dark",
+      "style": "1",
+      "locale": "en",
+      "toolbar_bg": "#0f172a",
+      "enable_publishing": false,
+      "withdateranges": true,
+      "hide_side_toolbar": false,
+      "allow_symbol_change": true,
+      "container_id": "tradingview_spx_chart"
+    });
+  </script>
+</div>
+<!-- TradingView Widget: S&P 500 Intraday Chart END -->
+ 
+  <!-- Finviz Map as Image with Link -->
+  <a href="https://finviz.com/published_map.ashx?t=sec&st=d1&f=040325&i=sec_d1_095117374" target="_blank" rel="noopener noreferrer">
+    <img class="finviz-img" src="https://finviz.com/published_map.ashx?t=sec&st=d1&f=040325&i=sec_d1_095117374" alt="Finviz Sector Map" />
+  </a>
 
   <script>
     function getMarketOpenTime() {
